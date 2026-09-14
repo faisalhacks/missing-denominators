@@ -1,0 +1,19 @@
+{
+  "incident_id": "german_wiki_incident",
+  "org": "PENDING",
+  "date_range": "PENDING",
+  "source_urls": [],
+  "published_headline": "PENDING — not verified. Do not fabricate; fill from a primary source.",
+  "estimand": "PENDING",
+  "poolability": {"poolable": false, "reason_code": "not-disclosed",
+    "note": "PENDING - unverified stub; excluded from all counts."},
+  "pending": true,
+  "notes": "STUB. This tool's author did not verify this incident and has entered no numbers. The operator must fill each field from a hand-verified primary source, setting state=recoverable with a citation, or leaving it not_recoverable. Never estimate.",
+  "agent_count": {"value": null, "state": "not_recoverable", "provenance": "PENDING: operator to supply.", "source_url": null, "location": null},
+  "runs_per_agent": {"value": null, "state": "not_recoverable", "provenance": "PENDING: operator to supply.", "source_url": null, "location": null},
+  "total_runs": {"value": null, "state": "not_recoverable", "provenance": "PENDING: operator to supply.", "source_url": null, "location": null},
+  "violation_count": {"value": null, "state": "not_recoverable", "provenance": "PENDING: operator to supply.", "source_url": null, "location": null},
+  "incident_count": {"value": null, "state": "not_recoverable", "provenance": "PENDING: operator to supply.", "source_url": null, "location": null},
+  "per_run_rate": {"value": null, "state": "not_recoverable", "provenance": "PENDING: operator to supply.", "source_url": null, "location": null},
+  "per_agent_rate": {"value": null, "state": "not_recoverable", "provenance": "PENDING: operator to supply.", "source_url": null, "location": null}
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/ai-incident-rate-record.schema.json",
+  "title": "AI incident disclosure rate record",
+  "description": "One published AI incident, with a three-state provenance for every numeric field. recoverable = published (cite source); derivable = computable from published figures (the tool emits the arithmetic); not_recoverable = genuinely absent from public sources. Never estimate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "incident_id", "org", "date_range", "source_urls", "published_headline",
+    "agent_count", "runs_per_agent", "total_runs",
+    "violation_count", "incident_count", "per_run_rate", "per_agent_rate"
+  ],
+  "properties": {
+    "incident_id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+    "org": {"type": "string"},
+    "date_range": {"type": "string"},
+    "source_urls": {"type": "array", "items": {"type": "string", "format": "uri"}},
+    "published_headline": {"type": "string",
+      "description": "The rate/count as the source headlines it, in its own (incompatible) unit. Feeds Table A's naive column."},
+    "estimand": {"type": "string",
+      "description": "What the disclosure actually measures (e.g. containment_breach_incident, cheating_propensity). Two disclosures are poolable only if they share an estimand."},
+    "poolability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["poolable", "reason_code"],
+      "description": "Whether a comparable per-run rate on the shared estimand can be obtained, and if not, the first reason it fails. This is the un-attackable classification: it holds even if a value is recoverable from secondary sources.",
+      "properties": {
+        "poolable": {"type": "boolean"},
+        "reason_code": {"enum": ["poolable", "no-denominator", "figure-only", "different-estimand", "not-disclosed"]},
+        "note": {"type": "string"}
+      }
+    },
+    "pending": {"type": "boolean",
+      "description": "true = stub awaiting hand-verified data; no numeric field may carry an invented value."},
+    "notes": {"type": "string"},
+    "agent_count": {"$ref": "#/$defs/measure"},
+    "runs_per_agent": {"$ref": "#/$defs/measure"},
+    "total_runs": {"$ref": "#/$defs/measure"},
+    "violation_count": {"$ref": "#/$defs/measure"},
+    "incident_count": {"$ref": "#/$defs/measure"},
+    "per_run_rate": {"$ref": "#/$defs/measure"},
+    "per_agent_rate": {"$ref": "#/$defs/measure"}
+  },
+  "$defs": {
+    "measure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "state", "provenance"],
+      "properties": {
+        "value": {"type": ["number", "null"]},
+        "state": {"enum": ["recoverable", "derivable", "not_recoverable"]},
+        "provenance": {"type": "string",
+          "description": "recoverable: citation (what the source says). derivable: leave to the tool (it writes the arithmetic). not_recoverable: why it is absent."},
+        "source_url": {"type": ["string", "null"]},
+        "location": {"type": ["string", "null"],
+          "description": "page / section / figure of the primary source"}
+      },
+      "allOf": [
+        {
+          "comment": "not_recoverable and derivable inputs carry no value; only recoverable may state a number.",
+          "if": {"properties": {"state": {"const": "not_recoverable"}}},
+          "then": {"properties": {"value": {"const": null}}}
+        }
+      ]
+    }
+  }
+}

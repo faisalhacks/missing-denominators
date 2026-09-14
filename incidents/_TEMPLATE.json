@@ -1,0 +1,16 @@
+{
+  "incident_id": "your_incident_id",
+  "org": "Org name",
+  "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+  "source_urls": ["https://primary-source"],
+  "published_headline": "The rate/count exactly as the source states it, in its own unit.",
+  "pending": false,
+  "notes": "How you verified it. Filenames starting with _ are treated as templates and skipped by convert.py.",
+  "agent_count":    {"value": null, "state": "not_recoverable", "provenance": "cite if recoverable; reason if not", "source_url": null, "location": null},
+  "runs_per_agent": {"value": null, "state": "not_recoverable", "provenance": "", "source_url": null, "location": null},
+  "total_runs":     {"value": null, "state": "not_recoverable", "provenance": "", "source_url": null, "location": null},
+  "violation_count":{"value": null, "state": "not_recoverable", "provenance": "", "source_url": null, "location": null},
+  "incident_count": {"value": null, "state": "not_recoverable", "provenance": "", "source_url": null, "location": null},
+  "per_run_rate":   {"value": null, "state": "not_recoverable", "provenance": "leave null + not_recoverable; the tool derives it if total_runs and violation_count are present", "source_url": null, "location": null},
+  "per_agent_rate": {"value": null, "state": "not_recoverable", "provenance": "leave null; the tool derives it if agent_count is present", "source_url": null, "location": null}
+}
